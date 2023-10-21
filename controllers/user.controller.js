@@ -30,9 +30,9 @@ const saveUser = async(req,res)=>{
 
 const updateUser = async(req,res)=>{
     const id = req.params.id;
-    const {password,email,status,...requestBody} = req.body;
-    const user = await User.update({requestBody},{where:{id},returning:true});
-    res.json(user);
+    const {password,email,isActive,...requestBody} = req.body;
+    const user = await User.update(requestBody,{where:{id},returning:true});
+    res.json(user[0]);
 }
 
 const deleteUser = async(req,res)=>{

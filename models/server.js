@@ -9,7 +9,8 @@ class Server {
       
         this.pathUrl= {
             users:'/api/users',
-            auth:'/api/auth'
+            auth:'/api/auth',
+            stores:'/api/stores',
         }
         this.port = process.env.PORT;
         this.database()
@@ -26,6 +27,7 @@ class Server {
     routes(){
         this.app.use(this.pathUrl.users,require('../routes/user.routes'))
         this.app.use(this.pathUrl.auth,require('../routes/auth.routes'))
+        this.app.use(this.pathUrl.stores,require('../routes/store.routes'))
     }
     async database(){
        await dbConnect()
