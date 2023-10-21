@@ -10,7 +10,8 @@ const sequelize = new Sequelize(
     password,
     {
         host,
-        dialect:'postgres'
+        dialect:'postgres',
+        logging:false
     }
 );
 
