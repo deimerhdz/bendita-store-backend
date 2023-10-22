@@ -1,3 +1,4 @@
+const Merchant = require("../models/merchant");
 const Store = require("../models/store");
 const User = require("../models/user");
 
@@ -21,9 +22,22 @@ const existStoreById = async (id='')=>{
         throw new Error(`The store id does not exists`)
     }
 }
-
+const existMerchant = async (name='')=>{
+    const existeMerchant = await Merchant.findOne({where:{name}});
+    if(existeMerchant){
+        throw new Error(`Merchant is already exists`)
+    }
+}
+const existMerchantById = async (id='')=>{
+    const existeMerchant = await Merchant.findByPk(id);
+    if(!existeMerchant){
+        throw new Error(`The merchant id does not exists`)
+    }
+}
 module.exports = {
     existEmail,
     existUserById,
-    existStoreById
+    existStoreById,
+    existMerchant,
+    existMerchantById
 }
