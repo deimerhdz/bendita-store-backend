@@ -1,5 +1,6 @@
 const Category = require("../models/category");
 const Merchant = require("../models/merchant");
+const Product = require("../models/product");
 const Store = require("../models/store");
 const User = require("../models/user");
 
@@ -49,6 +50,20 @@ const existCategoryById = async (id='')=>{
         throw new Error(`The category id does not exists`)
     }
 }
+
+const existProductById = async (id='')=>{
+    const existeProduct = await Product.findByPk(id);
+    if(!existeProduct){
+        throw new Error(`The product id does not exists`)
+    }
+}
+
+const existProductBarCode = async (barcode='')=>{
+    const existeProduct = await Product.findOne({where:{barcode}});
+    if(existeProduct){
+        throw new Error(`Product is already exists`)
+    }
+}
 module.exports = {
     existEmail,
     existUserById,
@@ -56,5 +71,7 @@ module.exports = {
     existMerchant,
     existCategoryById,
     existMerchantById,
-    existCategory
+    existCategory,
+    existProductById,
+    existProductBarCode
 }
