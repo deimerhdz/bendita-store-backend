@@ -44,6 +44,6 @@ const Merchant = sequelize.define(
 Store.hasMany(Merchant,{
     foreignKey: 'storeId'
   });
-  Merchant.belongsTo(Store);
+Merchant.belongsTo(Store);
 
 module.exports = Merchant;
