@@ -11,7 +11,8 @@ class Server {
             users:'/api/users',
             auth:'/api/auth',
             stores:'/api/stores',
-            merchants:'/api/merchants'
+            merchants:'/api/merchants',
+            categories:'/api/categories'
         }
         this.port = process.env.PORT;
         this.database()
@@ -30,6 +31,7 @@ class Server {
         this.app.use(this.pathUrl.auth,require('../routes/auth.routes'))
         this.app.use(this.pathUrl.stores,require('../routes/store.routes'))
         this.app.use(this.pathUrl.merchants,require('../routes/merchant.routes'))
+        this.app.use(this.pathUrl.categories,require('../routes/category.routes'))
     }
     async database(){
        await dbConnect()
