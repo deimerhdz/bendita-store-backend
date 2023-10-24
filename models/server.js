@@ -2,6 +2,7 @@ const express = require('express');
 require('dotenv').config();
 const cors = require('cors');
 const { dbConnect } = require('../database/config');
+const fileUpload = require('express-fileupload');
 class Server {
   
     constructor(){
@@ -15,7 +16,8 @@ class Server {
             categories:'/api/categories',
             products:'/api/products',
             purchase:'/api/purchases',
-            sale:'/api/sales'
+            sale:'/api/sales',
+            upload:'/api/uploads'
         }
         this.port = process.env.PORT;
         this.database()
@@ -27,6 +29,12 @@ class Server {
     middlewares(){
         this.app.use(cors())
         this.app.use(express.json());
+        //uploads files
+        this.app.use(fileUpload({
+            useTempFiles:true,
+            tempFileDir:'/tmp/',
+            createParentPath:true
+        }))
     }
 
     routes(){
@@ -38,6 +46,7 @@ class Server {
         this.app.use(this.pathUrl.products,require('../routes/products.routes'))
         this.app.use(this.pathUrl.purchase,require('../routes/purchase.routes'))
         this.app.use(this.pathUrl.sale,require('../routes/sale.routes'))
+        this.app.use(this.pathUrl.upload,require('../routes/upload.routes'))
     }
     async database(){
        await dbConnect()

@@ -13,7 +13,8 @@ const Store = sequelize.define(
             type:DataTypes.STRING,
             allowNull:false
         },
-        logo:{
+        image:{
+            field:'logo',
             type:DataTypes.STRING,
             allowNull:false,
             unique:true
